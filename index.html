@@ -34,7 +34,6 @@
             padding-bottom: 3rem;
         }
 
-        /* Top Bar Branding */
         .top-stripe {
             height: 6px;
             background: linear-gradient(90deg, var(--brand-green) 70%, var(--brand-red) 30%);
@@ -120,19 +119,6 @@
             text-align: center;
             box-shadow: var(--shadow-lg);
             margin-bottom: 2.5rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-banner::after {
-            content: "";
-            position: absolute;
-            right: -50px;
-            bottom: -50px;
-            width: 200px;
-            height: 200px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 50%;
         }
 
         .hero-banner h2 {
@@ -151,7 +137,6 @@
         .search-box {
             max-width: 500px;
             margin: 0 auto;
-            position: relative;
         }
 
         .search-input {
@@ -164,7 +149,7 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.15);
         }
 
-        /* Secciones de Contenido */
+        /* Encabezado de sección */
         .section-header {
             display: flex;
             align-items: center;
@@ -180,10 +165,10 @@
             font-weight: 700;
         }
 
-        /* Grid de Procesos */
+        /* Grid de Servicios */
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
             gap: 1.5rem;
             margin-bottom: 3.5rem;
         }
@@ -201,7 +186,6 @@
         }
 
         .card:hover {
-            transform: translateY(-4px);
             box-shadow: var(--shadow-lg);
             border-color: var(--brand-green-light);
         }
@@ -238,13 +222,13 @@
 
         .activity-list {
             list-style: none;
-            margin-bottom: 1.25rem;
+            margin-bottom: 1.5rem;
         }
 
         .activity-list li {
             position: relative;
             padding-left: 1.25rem;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
             font-size: 0.85rem;
             color: var(--text-main);
         }
@@ -262,7 +246,7 @@
             background: var(--brand-green);
             color: white;
             border: none;
-            padding: 0.65rem 1rem;
+            padding: 0.7rem 1rem;
             border-radius: 8px;
             font-weight: 600;
             font-size: 0.85rem;
@@ -278,7 +262,7 @@
             background: var(--brand-green-light);
         }
 
-        /* Canales de Atención Grid */
+        /* Canales Grid */
         .channels-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -345,7 +329,7 @@
             color: white;
         }
 
-        /* Modal Interactivo */
+        /* Modal Interactivo Dinámico */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -373,7 +357,9 @@
             background: #ffffff;
             border-radius: 16px;
             width: 100%;
-            max-width: 520px;
+            max-width: 620px;
+            max-height: 90vh;
+            overflow-y: auto;
             padding: 2rem;
             box-shadow: 0 20px 25px -5px rgba(0,0,0,0.2);
             position: relative;
@@ -405,6 +391,43 @@
             font-size: 1.5rem;
             color: var(--text-muted);
             cursor: pointer;
+        }
+
+        .interactive-info-box {
+            background: #fdfbf7;
+            border-left: 4px solid var(--brand-gold);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.25rem;
+        }
+
+        .interactive-info-box h4 {
+            font-size: 0.9rem;
+            color: var(--brand-green);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .contact-options-list {
+            list-style: none;
+        }
+
+        .contact-options-list li {
+            font-size: 0.82rem;
+            color: var(--text-main);
+            margin-bottom: 0.6rem;
+            background: #fff;
+            padding: 0.5rem 0.75rem;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+
+        .contact-options-list li strong {
+            color: var(--brand-green);
+            display: block;
+            margin-bottom: 0.1rem;
         }
 
         .form-group {
@@ -450,18 +473,6 @@
             background: #a81c22;
         }
 
-        .success-box {
-            display: none;
-            text-align: center;
-            padding: 1.5rem 0;
-        }
-
-        .success-box h4 {
-            color: var(--brand-green);
-            margin-bottom: 0.5rem;
-        }
-
-        /* Footer */
         footer {
             text-align: center;
             margin-top: 3rem;
@@ -484,7 +495,6 @@
     <nav class="navbar">
         <div class="navbar-container">
             <div class="brand-logo-container">
-                <!-- Logo Isotipo estilo 'Supermercado La Abundancia' -->
                 <div class="logo-badge">
                     <div class="logo-title">
                         La
@@ -526,7 +536,7 @@
             <div class="services-grid" id="servicesGrid">
                 
                 <!-- Proceso 1 -->
-                <article class="card" data-title="seleccion contratacion ingreso vacantes">
+                <article class="card" data-title="seleccion contratacion ingreso vacantes convocatorias">
                     <div>
                         <div class="card-top">
                             <span class="process-badge">Atracción de Personal</span>
@@ -534,14 +544,19 @@
                         </div>
                         <h4 class="card-title">Atracción y Selección de Talento</h4>
                         <p class="card-desc">Garantizamos la incorporación oportuna del mejor personal para salas de venta, bodegas y áreas administrativas.</p>
+                        
                         <ul class="activity-list">
-                            <li>Publicación y gestión de convocatorias internas de ascenso.</li>
+                            <li>Publicación de convocatorias internas de ascenso.</li>
                             <li>Entrevistas por competencias para cargos operacionales.</li>
                             <li>Pruebas psicotécnicas y verificación de referencias.</li>
                             <li>Inducción corporativa y bienvenida al equipo.</li>
                         </ul>
                     </div>
-                    <button class="btn-action" onclick="openModal('proceso', 'Atracción y Selección', 'Solicitar vacante interna o consulta de postulación')">
+                    <button class="btn-action" onclick="openInteractiveModal('Atracción y Selección de Talento', [
+                        {title: '📞 Teléfono Fijo: (604) 604-1210 - Ext. 104', desc: 'Sirve para comunicarte directamente con la Analista de Reclutamiento y resolver dudas sobre el estado de tus convocatorias o vacantes internas.'},
+                        {title: '📧 Correo Electrónico: seleccion@laabundancia.com', desc: 'Sirve para adjuntar tu hoja de vida actualizada para convocatorias internas, enviar soportes académicos o adjuntar referencias.'},
+                        {title: '🏬 Atención Presencial: Oficina de Gestión Humana (Piso 2)', desc: 'Sirve para recibir orientación sobre los requisitos de cargos superiores, radicar hojas de vida físicas o asistir a entrevistas programadas.'}
+                    ])">
                         <span>Interactuar con el Proceso</span> →
                     </button>
                 </article>
@@ -555,6 +570,7 @@
                         </div>
                         <h4 class="card-title">Nómina y Gestión Contractual</h4>
                         <p class="card-desc">Atención y procesamiento oportuno de pagos, pagos de prestaciones y trámites administrativos.</p>
+                        
                         <ul class="activity-list">
                             <li>Liquidación quincenal/mensual de nómina y recargos.</li>
                             <li>Afiliaciones a EPS, AFP, ARL y Caja de Compensación.</li>
@@ -562,7 +578,11 @@
                             <li>Registro y control de incapacidades y licencias.</li>
                         </ul>
                     </div>
-                    <button class="btn-action" onclick="openModal('proceso', 'Nómina y Contratación', 'Solicitar trámite de nómina o certificación')">
+                    <button class="btn-action" onclick="openInteractiveModal('Nómina y Gestión Contractual', [
+                        {title: '📞 Teléfono Fijo: (604) 604-1210 - Ext. 102', desc: 'Sirve para consultas sobre fechas de pago, deducciones de nómina, cálculo de horas extras o verificación de afiliaciones a seguridad social.'},
+                        {title: '📧 Correo de Nómina: nomina@laabundancia.com', desc: 'Sirve para enviar la imagen legible de tus incapacidades médicas, solicitar paz y salvos o reportar ajustes de datos bancarios.'},
+                        {title: '💻 Portal Autoservicio (Plataforma Web)', desc: 'Sirve para descargar directamente tus comprobantes de pago de nómina y certificados de ingresos sin necesidad de hacer filas.'}
+                    ])">
                         <span>Interactuar con el Proceso</span> →
                     </button>
                 </article>
@@ -576,6 +596,7 @@
                         </div>
                         <h4 class="card-title">Formación y Capacitación Abundancia</h4>
                         <p class="card-desc">Fortalecemos las competencias técnicas en manipulación de alimentos, atención al cliente y liderazgo.</p>
+                        
                         <ul class="activity-list">
                             <li>Cursos en Manejo Higiénico de Alimentos y Cajas.</li>
                             <li>Evaluaciones del desempeño laboral.</li>
@@ -583,7 +604,11 @@
                             <li>Talleres de Servicio al Cliente "Experiencia Abundancia".</li>
                         </ul>
                     </div>
-                    <button class="btn-action" onclick="openModal('proceso', 'Formación y Desarrollo', 'Inscripción a cursos o evaluación')">
+                    <button class="btn-action" onclick="openInteractiveModal('Formación y Capacitación Abundancia', [
+                        {title: '📞 Teléfono Fijo: (604) 604-1210 - Ext. 108', desc: 'Sirve para consultar la programación mensual de talleres, cupos para el curso de manipulación de alimentos o reprogramar asistencias.'},
+                        {title: '📧 Correo de Capacitaciones: capacitaciones@laabundancia.com', desc: 'Sirve para radicar diplomas externos, solicitar certificados de asistencia a capacitaciones del supermercado o enviar propuestas de cursos.'},
+                        {title: '🏬 Atención Presencial: Oficina de Gestión Humana (Piso 2)', desc: 'Sirve para solicitar retroalimentación sobre tus evaluaciones de desempeño o inscribirte directamente a los planes de carrera.'}
+                    ])">
                         <span>Interactuar con el Proceso</span> →
                     </button>
                 </article>
@@ -597,6 +622,7 @@
                         </div>
                         <h4 class="card-title">Bienestar y Clima Organizacional</h4>
                         <p class="card-desc">Programas diseñados para mejorar la calidad de vida y celebrar el compromiso de nuestros colaboradores.</p>
+                        
                         <ul class="activity-list">
                             <li>Plan de beneficios (descuentos en supermercado).</li>
                             <li>Celebraciones corporativas y día del empleado.</li>
@@ -604,13 +630,17 @@
                             <li>Medición anual del Clima Organizacional.</li>
                         </ul>
                     </div>
-                    <button class="btn-action" onclick="openModal('proceso', 'Bienestar Organizacional', 'Consultar beneficios o inscribir familiar')">
+                    <button class="btn-action" onclick="openInteractiveModal('Bienestar y Clima Organizacional', [
+                        {title: '📞 Teléfono Fijo: (604) 604-1210 - Ext. 106', desc: 'Sirve para preguntar por los convenios comerciales vigentes, auxilios corporativos o inscripciones a eventos y fechas especiales.'},
+                        {title: '📧 Correo de Bienestar: bienestar@laabundancia.com', desc: 'Sirve para enviar propuestas de actividades, solicitar la activación del descuento de empleado o enviar solicitudes de ayuda social.'},
+                        {title: '📱 WhatsApp Corporativo: (+57) 314 604 8899', desc: 'Sirve para recibir notificaciones rápidas, circulares de bienestar, horarios de celebraciones y confirmaciones de eventos.'}
+                    ])">
                         <span>Interactuar con el Proceso</span> →
                     </button>
                 </article>
 
                 <!-- Proceso 5 -->
-                <article class="card" data-title="sst seguridad salud salud ocupacional riesgo ergonomia">
+                <article class="card" data-title="sst seguridad salud salud ocupacional riesgo ergonomia epp">
                     <div>
                         <div class="card-top">
                             <span class="process-badge">Prevención</span>
@@ -618,14 +648,19 @@
                         </div>
                         <h4 class="card-title">Seguridad y Salud en el Trabajo (SST)</h4>
                         <p class="card-desc">Promovemos un ambiente de trabajo seguro en góndolas, cavas, bodegas y cajas registradoras.</p>
+                        
                         <ul class="activity-list">
                             <li>Capacitación en ergonomía y pausas activas.</li>
                             <li>Exámenes médicos ocupacionales periódicos.</li>
-                            <li>Entrega y control de Elementos de Protección Personal (EPP).</li>
+                            <li>Entrega y control de Elementos de Protección Personal.</li>
                             <li>Comité Paritario de Seguridad y Salud (COPASST).</li>
                         </ul>
                     </div>
-                    <button class="btn-action" onclick="openModal('proceso', 'Seguridad y Salud (SST)', 'Reportar condición de riesgo o solicitar EPP')">
+                    <button class="btn-action" onclick="openInteractiveModal('Seguridad y Salud en el Trabajo (SST)', [
+                        {title: '📞 Teléfono Fijo: (604) 604-1210 - Ext. 105', desc: 'Sirve para el reporte inmediato de accidentes laborales, alertas por derrames o fallas de seguridad en el cuarto frío y bodegas.'},
+                        {title: '📧 Correo de SST: sst@laabundancia.com', desc: 'Sirve para reportar condiciones peligrosas en infraestructura, adjuntar exámenes periódicos o solicitar el cambio de elementos ergonómicos.'},
+                        {title: '🏬 Entrega Física: Oficina GH / Almacén Central', desc: 'Sirve para reclamar tu dotación de calzado antideslizante, fajas de fuerza, delantales y guantes de protección.'}
+                    ])">
                         <span>Interactuar con el Proceso</span> →
                     </button>
                 </article>
@@ -641,32 +676,32 @@
 
             <div class="channels-grid">
                 
-                <div class="channel-card" onclick="openModal('canal', 'Portal Autoservicio (24/7)', 'Generación de Certificados y Desprendibles')">
+                <div class="channel-card" onclick="openGeneralForm('Portal Autoservicio (24/7)', 'Generación de Certificados y Desprendibles')">
                     <div class="channel-icon">💻</div>
                     <h4>Portal Autoservicio</h4>
                     <p>Descarga inmediata de certificados de trabajo, desprendibles y días de vacaciones.</p>
                     <button class="btn-outline">Ingresar al Portal</button>
                 </div>
 
-                <div class="channel-card" onclick="openModal('canal', 'Mesa de Ayuda (Ticketing)', 'Radicación de Novedades e Incapacidades')">
+                <div class="channel-card" onclick="openGeneralForm('Mesa de Ayuda (Ticketing)', 'Radicación de Novedades e Incapacidades')">
                     <div class="channel-icon">🎫</div>
                     <h4>Mesa de Ayuda</h4>
                     <p>Registra tickets para revisión de pagos, liquidaciones e incapacidades médicas.</p>
                     <button class="btn-outline">Crear Ticket</button>
                 </div>
 
-                <div class="channel-card" onclick="openModal('canal', 'Oficina de Gestión Humana', 'Atención Presencial en Oficina')">
+                <div class="channel-card" onclick="openGeneralForm('Oficina de Gestión Humana', 'Atención Presencial en Sede')">
                     <div class="channel-icon">🏬</div>
                     <h4>Atención Presencial</h4>
-                    <p>Agenda tu cita para la firma de documentos, reclamo de dotación u orientación.</p>
+                    <p>Ubicada en el Piso 2 de la Sede Principal. Horario: Lunes a Viernes de 8:00 a.m. a 5:00 p.m.</p>
                     <button class="btn-outline">Agendar Cita</button>
                 </div>
 
-                <div class="channel-card" onclick="openModal('canal', 'Correo Oficial TH', 'Envío de Comunicaciones Institucionales')">
-                    <div class="channel-icon">✉️</div>
-                    <h4>Correo Institucional</h4>
-                    <p>Contacto directo con el equipo de Gestión Humana para postulaciones externas.</p>
-                    <button class="btn-outline">Enviar Mensaje</button>
+                <div class="channel-card" onclick="openGeneralForm('Conmutador General TH', 'Atención Telefónica Fija')">
+                    <div class="channel-icon">📞</div>
+                    <h4>Línea Telefónica Fija</h4>
+                    <p>Llama al (604) 604-1210 para comunicarte con las extensiones de cada proceso.</p>
+                    <button class="btn-outline">Llamar a Central</button>
                 </div>
 
             </div>
@@ -674,45 +709,18 @@
 
         <footer>
             <p>© 2026 Supermercado La Abundancia - Dirección de Gestión del Talento Humano</p>
-            <p>Comprometidos con el desarrollo y bienestar de nuestra gente.</p>
+            <p>Comprometidos con el desarrollo y bienestar de nuestra gente en nuestra sede única.</p>
         </footer>
 
     </div>
 
-    <!-- Modal Formulario Dinámico -->
+    <!-- Modal Dinámico Interactivo -->
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal">
             <button class="modal-close" onclick="closeModal()">&times;</button>
             
-            <div id="modalFormContent">
-                <div class="modal-header">
-                    <h3 id="modalTitle">Atención a Servicio</h3>
-                    <small id="modalSubtitle" style="color:var(--brand-red); font-weight:600;">Supermercado La Abundancia</small>
-                </div>
-
-                <form id="interactionForm" onsubmit="submitForm(event)">
-                    <div class="form-group">
-                        <label for="empName">Nombre del Colaborador</label>
-                        <input type="text" id="empName" class="form-control" placeholder="Ej. Carlos Mendoza" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="empDoc">Número de Documento / Cédula</label>
-                        <input type="text" id="empDoc" class="form-control" placeholder="Número de identificación" required>
-                    </div>
-
-                    <div class="form-group" id="dynamicFieldArea">
-                        <!-- Campos variables según el proceso/canal seleccionado -->
-                    </div>
-
-                    <button type="submit" class="btn-submit" id="submitBtn">Enviar Solicitud a TH</button>
-                </form>
-            </div>
-
-            <div class="success-box" id="successBox">
-                <h4>¡Solicitud Recibida!</h4>
-                <p id="successMessageText">Tu trámite ha sido registrado exitosamente en el sistema de Talento Humano del Supermercado La Abundancia.</p>
-                <button class="btn-submit" style="background:var(--brand-green); margin-top:1rem;" onclick="closeModal()">Aceptar</button>
+            <div id="modalBodyContent">
+                <!-- El contenido se inyecta dinámicamente desde JS -->
             </div>
         </div>
     </div>
@@ -729,55 +737,139 @@
             });
         });
 
-        // Apertura del Modal Interactivo
-        function openModal(tipo, nombre, detalle) {
-            document.getElementById('modalTitle').textContent = nombre;
-            document.getElementById('modalSubtitle').textContent = `Supermercado La Abundancia | ${tipo === 'proceso' ? 'Trámite de Proceso' : 'Acceso a Canal'}`;
-            
-            const fieldArea = document.getElementById('dynamicFieldArea');
-            
-            if (tipo === 'proceso') {
-                fieldArea.innerHTML = `
-                    <label for="processAction">Tipo de Requerimiento</label>
-                    <select id="processAction" class="form-control" required>
-                        <option value="">Selecciona la opción...</option>
-                        <option value="Consulta sobre el proceso">Consulta de información</option>
-                        <option value="Radicación de documentos">Radicación de documentación</option>
-                        <option value="Solicitud de acompañamiento">Solicitud de apoyo / asesoría</option>
-                    </select>
-                    <div style="margin-top:0.8rem;">
+        // Modal que muestra las opciones de contacto específicas y explica para qué sirve cada una
+        function openInteractiveModal(processName, contactOptions) {
+            let optionsHtml = '';
+            contactOptions.forEach(opt => {
+                optionsHtml += `
+                    <li>
+                        <strong>${opt.title}</strong>
+                        <span>${opt.desc}</span>
+                    </li>
+                `;
+            });
+
+            const content = `
+                <div class="modal-header">
+                    <h3>${processName}</h3>
+                    <small style="color:var(--brand-red); font-weight:600;">Supermercado La Abundancia | Guía de Atención</small>
+                </div>
+
+                <div class="interactive-info-box">
+                    <h4>ℹ️ Opciones de Contacto Directo y su Función</h4>
+                    <p style="font-size: 0.83rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+                        A continuación te explicamos exactamente a través de qué medio contactarnos y para qué sirve cada opción:
+                    </p>
+                    <ul class="contact-options-list">
+                        ${optionsHtml}
+                    </ul>
+                </div>
+
+                <div style="text-align: center; margin-top: 1.25rem;">
+                    <p style="font-size: 0.83rem; color: var(--text-main); margin-bottom: 0.75rem;">¿Deseas dejar registrada una solicitud digital sobre este proceso?</p>
+                    <button class="btn-submit" style="background:var(--brand-green);" onclick="openRequestForm('${processName}')">Registrar Solicitud Digital</button>
+                </div>
+            `;
+
+            document.getElementById('modalBodyContent').innerHTML = content;
+            document.getElementById('modalOverlay').classList.add('active');
+        }
+
+        // Formulario de radicación de solicitud al hacer clic en el botón interno
+        function openRequestForm(processName) {
+            const content = `
+                <div class="modal-header">
+                    <h3>Radicar Solicitud: ${processName}</h3>
+                    <small style="color:var(--brand-red); font-weight:600;">Supermercado La Abundancia</small>
+                </div>
+
+                <form id="interactionForm" onsubmit="submitForm(event, '${processName}')">
+                    <div class="form-group">
+                        <label for="empName">Nombre del Colaborador</label>
+                        <input type="text" id="empName" class="form-control" placeholder="Ej. Carlos Mendoza" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="empDoc">Número de Cédula</label>
+                        <input type="text" id="empDoc" class="form-control" placeholder="Número de identificación" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="processAction">Tipo de Requerimiento</label>
+                        <select id="processAction" class="form-control" required>
+                            <option value="">Selecciona la opción...</option>
+                            <option value="Consulta sobre el proceso">Consulta de información general</option>
+                            <option value="Radicación de documentos">Radicación de documentación</option>
+                            <option value="Solicitud de acompañamiento">Solicitud de apoyo / asesoría</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
                         <label for="detailText">Observaciones / Detalle</label>
                         <textarea id="detailText" class="form-control" rows="3" placeholder="Escribe aquí los detalles de tu solicitud..." required></textarea>
                     </div>
-                `;
-            } else {
-                fieldArea.innerHTML = `
-                    <label for="channelOption">Trámite a realizar</label>
-                    <input type="text" class="form-control" value="${detalle}" readonly style="background:#f3f4f6;">
-                    <div style="margin-top:0.8rem;">
-                        <label for="detailText">Descripción detallada</label>
-                        <textarea id="detailText" class="form-control" rows="3" placeholder="Indica las fechas, certificados o asunto requerido..." required></textarea>
-                    </div>
-                `;
-            }
 
-            document.getElementById('modalFormContent').style.display = 'block';
-            document.getElementById('successBox').style.display = 'none';
+                    <button type="submit" class="btn-submit">Enviar Solicitud a Talento Humano</button>
+                </form>
+            `;
+            document.getElementById('modalBodyContent').innerHTML = content;
+        }
+
+        // Modal para los canales
+        function openGeneralForm(channelName, detail) {
+            const content = `
+                <div class="modal-header">
+                    <h3>Canal: ${channelName}</h3>
+                    <small style="color:var(--brand-red); font-weight:600;">Supermercado La Abundancia</small>
+                </div>
+
+                <form id="interactionForm" onsubmit="submitForm(event, '${channelName}')">
+                    <div class="form-group">
+                        <label for="empName">Nombre del Colaborador</label>
+                        <input type="text" id="empName" class="form-control" placeholder="Ej. Carlos Mendoza" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="empDoc">Número de Cédula</label>
+                        <input type="text" id="empDoc" class="form-control" placeholder="Número de identificación" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Trámite Asociado</label>
+                        <input type="text" class="form-control" value="${detail}" readonly style="background:#f3f4f6;">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="detailText">Descripción detallada</label>
+                        <textarea id="detailText" class="form-control" rows="3" placeholder="Indica fechas, asunto o requerimiento..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit">Enviar a través de este Canal</button>
+                </form>
+            `;
+            document.getElementById('modalBodyContent').innerHTML = content;
             document.getElementById('modalOverlay').classList.add('active');
         }
 
         function closeModal() {
             document.getElementById('modalOverlay').classList.remove('active');
-            document.getElementById('interactionForm').reset();
         }
 
-        function submitForm(e) {
+        function submitForm(e, origin) {
             e.preventDefault();
             const nombre = document.getElementById('empName').value;
             
-            document.getElementById('modalFormContent').style.display = 'none';
-            document.getElementById('successMessageText').textContent = `Gracias ${nombre}. Hemos recibido tu registro. El equipo de Gestión Humana de La Abundancia te contactará pronto.`;
-            document.getElementById('successBox').style.display = 'block';
+            const successContent = `
+                <div style="text-align: center; padding: 1.5rem 0;">
+                    <div style="font-size: 3rem; color: var(--brand-green); margin-bottom: 0.5rem;">✓</div>
+                    <h4 style="color: var(--brand-green); font-size: 1.25rem; margin-bottom: 0.5rem;">¡Solicitud Registrada con Éxito!</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+                        Gracias <strong>${nombre}</strong>. Tu trámite vinculado a <strong>${origin}</strong> ha ingresado al sistema de Gestión Humana del Supermercado La Abundancia. Te contactaremos pronto.
+                    </p>
+                    <button class="btn-submit" style="background:var(--brand-green);" onclick="closeModal()">Entendido</button>
+                </div>
+            `;
+            document.getElementById('modalBodyContent').innerHTML = successContent;
         }
     </script>
 
