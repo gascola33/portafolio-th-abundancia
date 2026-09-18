@@ -1,145 +1,1078 @@
-<div class="channel-card" onclick="openPQRSModal()">
-    <div class="channel-icon">📋</div>
-    <h4>Radicar PQRS</h4>
-    <p>Formulario oficial de Peticiones, Quejas, Reclamos y Sugerencias.</p>
-    <button class="btn-outline">Diligenciar PQRS</button>
-</div>
-function openPQRSModal() {
-    const today = new Date().toISOString().split('T')[0];
-    const now = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio de Gestión Humana - Supermercado La Abundancia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-green: #0f5429;
+            --brand-green-light: #1b7a3e;
+            --brand-red: #c8232a;
+            --brand-gold: #f59e0b;
+            --bg-body: #f4f7f5;
+            --bg-card: #ffffff;
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+            --border-color: #e5e7eb;
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+            --shadow-lg: 0 10px 25px -5px rgba(15, 84, 41, 0.12);
+        }
 
-    const content = `
-        <div class="modal-header">
-            <h3>Formato de Peticiones, Quejas, Reclamos y Sugerencias (PQRS)</h3>
-            <small style="color:var(--brand-red); font-weight:600;">Supermercado La Abundancia</small>
-        </div>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
 
-        <form id="pqrsForm" onsubmit="submitPQRSForm(event)">
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 3rem;
+        }
+
+        .top-stripe {
+            height: 6px;
+            background: linear-gradient(90deg, var(--brand-green) 70%, var(--brand-red) 30%);
+        }
+
+        .navbar {
+            background: #ffffff;
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .navbar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .brand-logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-badge {
+            border: 2px solid var(--brand-green);
+            border-radius: 50px;
+            padding: 0.4rem 1.2rem;
+            text-align: center;
+            background: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .logo-title {
+            color: var(--brand-red);
+            font-weight: 700;
+            font-size: 1.25rem;
+            line-height: 1;
+            font-family: serif;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-subtitle {
+            color: var(--brand-red);
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .cart-icon-svg {
+            color: var(--brand-green);
+            vertical-align: middle;
+            margin-left: 2px;
+        }
+
+        .brand-text-header h1 {
+            font-size: 1.1rem;
+            color: var(--brand-green);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .brand-text-header p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .btn-pqrs-header {
+            background: var(--brand-red);
+            color: white;
+            border: none;
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            box-shadow: 0 2px 4px rgba(200, 35, 42, 0.2);
+        }
+
+        .btn-pqrs-header:hover {
+            background: #a81c22;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto 0;
+            padding: 0 1.5rem;
+        }
+
+        /* Banner Hero */
+        .hero-banner {
+            background: linear-gradient(135deg, var(--brand-green) 0%, var(--brand-green-light) 100%);
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
+            color: white;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-banner h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-banner p {
+            font-size: 1rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .search-box {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.85rem 1.25rem;
+            border-radius: 50px;
+            border: none;
+            outline: none;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        /* Encabezado de sección */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            border-left: 5px solid var(--brand-red);
+            padding-left: 0.75rem;
+        }
+
+        .section-header h3 {
+            font-size: 1.4rem;
+            color: var(--brand-green);
+            font-weight: 700;
+        }
+
+        /* Grid de Servicios */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3.5rem;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-lg);
+            border-color: var(--brand-green-light);
+        }
+
+        .card-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .process-badge {
+            background: #edf7ed;
+            color: var(--brand-green);
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            border: 1px solid rgba(15, 84, 41, 0.2);
+        }
+
+        .card-title {
+            font-size: 1.15rem;
+            color: var(--brand-green);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-desc {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .activity-list {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .activity-list li {
+            position: relative;
+            padding-left: 1.25rem;
+            margin-bottom: 0.4rem;
+            font-size: 0.85rem;
+            color: var(--text-main);
+        }
+
+        .activity-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--brand-red);
+            font-weight: bold;
+        }
+
+        .btn-action {
+            width: 100%;
+            background: var(--brand-green);
+            color: white;
+            border: none;
+            padding: 0.7rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-action:hover {
+            background: var(--brand-green-light);
+        }
+
+        /* Canales Grid */
+        .channels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 3rem;
+        }
+
+        .channel-card {
+            background: #ffffff;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .channel-card:hover {
+            border-color: var(--brand-red);
+            transform: translateY(-3px);
+        }
+
+        .channel-card.highlight {
+            border: 2px solid var(--brand-red);
+            background: #fffafa;
+        }
+
+        .channel-icon {
+            width: 50px;
+            height: 50px;
+            background: #fdf2f2;
+            color: var(--brand-red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .channel-card h4 {
+            color: var(--brand-green);
+            font-size: 1.05rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .channel-card p {
+            font-size: 0.83rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--brand-green);
+            color: var(--brand-green);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .channel-card:hover .btn-outline {
+            background: var(--brand-green);
+            color: white;
+        }
+
+        .channel-card.highlight .btn-outline {
+            background: var(--brand-red);
+            color: white;
+            border-color: var(--brand-red);
+        }
+
+        .channel-card.highlight:hover .btn-outline {
+            background: #a81c22;
+        }
+
+        /* Modal Interactivo Dinámico */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 1000;
+            padding: 1rem;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal {
+            background: #ffffff;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 650px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 2rem;
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.2);
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            border-bottom: 2px solid var(--bg-body);
+            padding-bottom: 0.75rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .modal-header h3 {
+            color: var(--brand-green);
+            font-size: 1.25rem;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1.25rem;
+            right: 1.25rem;
+            background: transparent;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            cursor: pointer;
+        }
+
+        .interactive-info-box {
+            background: #fdfbf7;
+            border-left: 4px solid var(--brand-gold);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.25rem;
+        }
+
+        .interactive-info-box h4 {
+            font-size: 0.9rem;
+            color: var(--brand-green);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .contact-options-list {
+            list-style: none;
+        }
+
+        .contact-options-list li {
+            font-size: 0.82rem;
+            color: var(--text-main);
+            margin-bottom: 0.6rem;
+            background: #fff;
+            padding: 0.5rem 0.75rem;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+
+        .contact-options-list li strong {
+            color: var(--brand-green);
+            display: block;
+            margin-bottom: 0.1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 0.3rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.65rem 0.85rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            font-size: 0.88rem;
+            outline: none;
+        }
+
+        .form-control:focus {
+            border-color: var(--brand-green);
+            box-shadow: 0 0 0 3px rgba(15, 84, 41, 0.1);
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: var(--brand-red);
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 0.5rem;
+        }
+
+        .btn-submit:hover {
+            background: #a81c22;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.82rem;
+        }
+
+        @media (max-width: 640px) {
+            .navbar-container { flex-direction: column; text-align: center; }
+            .nav-actions { width: 100%; justify-content: center; }
+            .hero-banner h2 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-stripe"></div>
+
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="brand-logo-container">
+                <div class="logo-badge">
+                    <div class="logo-title">
+                        La
+                        <svg class="cart-icon-svg" width="18" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="9" cy="21" r="1"></circle>
+                            <circle cx="20" cy="21" r="1"></circle>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                        </svg>
+                    </div>
+                    <div class="logo-title">Abundancia</div>
+                    <div class="logo-subtitle">SUPERMARKET</div>
+                </div>
+                <div class="brand-text-header">
+                    <h1>Gestión del Talento Humano</h1>
+                    <p>Servicios internos para colaboradores</p>
+                </div>
+            </div>
             
-            <div style="background:#f9fafb; padding:1rem; border-radius:8px; border:1px solid var(--border-color); margin-bottom:1rem;">
-                <h4 style="color:var(--brand-green); font-size:0.9rem; margin-bottom:0.75rem;">Información del Solicitante</h4>
-                
-                <div class="form-group">
-                    <label for="pqrsNombre">Nombre completo *</label>
-                    <input type="text" id="pqrsNombre" class="form-control" required placeholder="Ej. Juan Pérez">
-                </div>
-
-                <div class="form-group">
-                    <label for="pqrsDoc">Tipo y número de documento *</label>
-                    <input type="text" id="pqrsDoc" class="form-control" required placeholder="Ej. C.C. 1017000000">
-                </div>
-
-                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:0.75rem;">
-                    <div class="form-group">
-                        <label for="pqrsEmpresa">Empresa (si aplica)</label>
-                        <input type="text" id="pqrsEmpresa" class="form-control" placeholder="Opcional">
-                    </div>
-                    <div class="form-group">
-                        <label for="pqrsCargo">Cargo (si aplica)</label>
-                        <input type="text" id="pqrsCargo" class="form-control" placeholder="Opcional">
-                    </div>
-                </div>
-
-                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:0.75rem;">
-                    <div class="form-group">
-                        <label for="pqrsEmail">Correo electrónico *</label>
-                        <input type="email" id="pqrsEmail" class="form-control" required placeholder="correo@ejemplo.com">
-                    </div>
-                    <div class="form-group">
-                        <label for="pqrsTel">Teléfono de contacto *</label>
-                        <input type="tel" id="pqrsTel" class="form-control" required placeholder="Ej. 3000000000">
-                    </div>
-                </div>
+            <div class="nav-actions">
+                <button class="btn-pqrs-header" onclick="openPQRSModal()">
+                    <span>📋 Radicar PQRS</span>
+                </button>
+                <span class="process-badge" style="background:#fef2f2; color:var(--brand-red); border-color:#fca5a5;">Portal del Empleado</span>
             </div>
-
-            <div style="background:#f9fafb; padding:1rem; border-radius:8px; border:1px solid var(--border-color); margin-bottom:1rem;">
-                <h4 style="color:var(--brand-green); font-size:0.9rem; margin-bottom:0.75rem;">Información de la Solicitud</h4>
-                
-                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:0.75rem;">
-                    <div class="form-group">
-                        <label>Fecha de radicación</label>
-                        <input type="date" class="form-control" value="${today}" readonly style="background:#e5e7eb;">
-                    </div>
-                    <div class="form-group">
-                        <label>Hora</label>
-                        <input type="text" class="form-control" value="${now}" readonly style="background:#e5e7eb;">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="pqrsCanal">Canal de recepción *</label>
-                    <select id="pqrsCanal" class="form-control" required>
-                        <option value="Página web" selected>Página web</option>
-                        <option value="Presencial">Presencial</option>
-                        <option value="Telefónico">Telefónico</option>
-                        <option value="Correo electrónico">Correo electrónico</option>
-                        <option value="Buzón de sugerencias">Buzón de sugerencias</option>
-                        <option value="Otro">Otro</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="pqrsTipo">Tipo de solicitud *</label>
-                    <select id="pqrsTipo" class="form-control" required>
-                        <option value="">Seleccione una opción...</option>
-                        <option value="Petición">Petición</option>
-                        <option value="Queja">Queja</option>
-                        <option value="Reclamo">Reclamo</option>
-                        <option value="Sugerencia">Sugerencia</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="pqrsDesc">Descripción de la solicitud *</label>
-                <textarea id="pqrsDesc" class="form-control" rows="4" required placeholder="Detalle ampliamente su petición, queja, reclamo o sugerencia..."></textarea>
-            </div>
-
-            <div style="background:#f9fafb; padding:1rem; border-radius:8px; border:1px solid var(--border-color); margin-bottom:1rem;">
-                <h4 style="color:var(--brand-green); font-size:0.9rem; margin-bottom:0.5rem;">Anexos (Si aplica)</h4>
-                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap:0.5rem; margin-bottom:0.5rem; font-size:0.85rem;">
-                    <label><input type="checkbox" value="Fotografías"> Fotografías</label>
-                    <label><input type="checkbox" value="Documentos"> Documentos</label>
-                    <label><input type="checkbox" value="Facturas"> Facturas</label>
-                    <label><input type="checkbox" value="Correos electrónicos"> Correos electr.</label>
-                    <label><input type="checkbox" value="Otros"> Otros</label>
-                </div>
-                <div class="form-group" style="margin-bottom:0;">
-                    <input type="text" id="pqrsEspecifique" class="form-control" placeholder="Especifique detalles de los anexos si aplica...">
-                </div>
-            </div>
-
-            <button type="submit" class="btn-submit">Radicar PQRS</button>
-        </form>
-    `;
-
-    document.getElementById('modalBodyContent').innerHTML = content;
-    document.getElementById('modalOverlay').classList.add('active');
-}
-
-function submitPQRSForm(e) {
-    e.preventDefault();
-    const nombre = document.getElementById('pqrsNombre').value;
-    const tipo = document.getElementById('pqrsTipo').value;
-    const radicado = Math.floor(100000 + Math.random() * 900000);
-
-    const successContent = `
-        <div style="text-align: center; padding: 1.5rem 0;">
-            <div style="font-size: 3rem; color: var(--brand-green); margin-bottom: 0.5rem;">✓</div>
-            <h4 style="color: var(--brand-green); font-size: 1.25rem; margin-bottom: 0.5rem;">¡PQRS Radicada Exitosamente!</h4>
-            <p style="font-size: 0.88rem; color: var(--text-main); margin-bottom: 0.5rem;">
-                Estimado(a) <strong>${nombre}</strong>, se ha registrado su <strong>${tipo}</strong> correctamente.
-            </p>
-            <div style="background:#edf7ed; border:1px solid var(--brand-green); padding:0.75rem; border-radius:8px; margin: 1rem 0;">
-                <small style="color:var(--text-muted); display:block;">Número de Radicado:</small>
-                <strong style="font-size:1.2rem; color:var(--brand-green);">#PQRS-${radicado}</strong>
-            </div>
-            <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1.5rem;">
-                Su solicitud ha pasado a estado <strong>Recibida</strong> y fue remitida al área correspondiente para su gestión.
-            </p>
-            <button class="btn-submit" style="background:var(--brand-green);" onclick="closeModal()">Cerrar</button>
         </div>
-    `;
-    document.getElementById('modalBodyContent').innerHTML = successContent;
-}
+    </nav>
 
+    <div class="container">
+        
+        <!-- Banner Principal -->
+        <header class="hero-banner">
+            <h2>Portafolio de Servicios TH</h2>
+            <p>Acompañamos tu desarrollo integral y aseguramos tu bienestar en el Supermercado La Abundancia.</p>
+            <div class="search-box">
+                <input type="text" id="searchInput" class="search-input" placeholder="Buscar trámite o proceso (ej. Nómina, Certificado, PQRS, Vacaciones)...">
+            </div>
+        </header>
+
+        <!-- Procesos Clave de TH -->
+        <section>
+            <div class="section-header">
+                <h3>Procesos y Servicios de Talento Humano</h3>
+            </div>
+
+            <div class="services-grid" id="servicesGrid">
+                
+                <!-- Proceso 1 -->
+                <article class="card" data-title="seleccion contratacion ingreso vacantes convocatorias">
+                    <div>
+                        <div class="card-top">
+                            <span class="process-badge">Atracción de Personal</span>
+                            <small style="color:var(--text-muted);">Proceso 01</small>
+                        </div>
+                        <h4 class="card-title">Atracción y Selección de Talento</h4>
+                        <p class="card-desc">Garantizamos la incorporación oportuna del mejor personal para salas de venta, bodegas y áreas administrativas.</p>
+                        
+                        <ul class="activity-list">
+                            <li>Publicación de convocatorias internas de ascenso.</li>
+                            <li>Entrevistas por competencias para cargos operacionales.</li>
+                            <li>Pruebas psicotécnicas y verificación de referencias.</li>
+                            <li>Inducción corporativa y bienvenida al equipo.</li>
+                        </ul>
+                    </div>
+                    <button class="btn-action" onclick="openInteractiveModal('Atracción y Selección de Talento', [
+                        {title: '📞 Teléfono Fijo: (604) 604-1210 - Ext. 104', desc: 'Sirve para comunicarte directamente con la Analista de Reclutamiento y resolver dudas sobre el estado de tus convocatorias o vacantes internas.'},
+                        {title: '📧 Correo Electrónico: seleccion@laabundancia.com', desc: 'Sirve para adjuntar tu hoja de vida actualizada para convocatorias internas, enviar soportes académicos o adjuntar referencias.'},
+                        {title: '🏬 Atención Presencial: Oficina de Gestión Humana (Piso 2)', desc: 'Sirve para recibir orientación sobre los requisitos de cargos superiores, radicar hojas de vida físicas o asistir a entrevistas programadas.'}
+                    ])">
+                        <span>Interactuar con el Proceso</span> →
+                    </button>
+                </article>
+
+                <!-- Proceso 2 -->
+                <article class="card" data-title="nomina pagos certificados contratos prestaciones incapacidades">
+                    <div>
+                        <div class="card-top">
+                            <span class="process-badge">Administración</span>
+                            <small style="color:var(--text-muted);">Proceso 02</small>
+                        </div>
+                        <h4 class="card-title">Nómina y Gestión Contractual</h4>
+                        <p class="card-desc">Atención y procesamiento oportuno de pagos, pagos de prestaciones y trámites administrativos.</p>
+                        
+                        <ul class="activity-list">
+                            <li>Liquidación quincenal/mensual de nómina y recargos.</li>
+                            <li>Afiliaciones a EPS, AFP, ARL y Caja de Compensación.</li>
+                            <li>Emisión de certificados laborales y desprendibles.</li>
+                            <li>Registro y control de incapacidades y licencias.</li>
+                        </ul>
+                    </div>
+                    <button class="btn-action" onclick="openInteractiveModal('Nómina y Gestión Contractual', [
+                        {title: '📞 Teléfono Fijo: (604) 604-1210 - Ext. 102', desc: 'Sirve para consultas sobre fechas de pago, deducciones de nómina, cálculo de horas extras o verificación de afiliaciones a seguridad social.'},
+                        {title: '📧 Correo de Nómina: nomina@laabundancia.com', desc: 'Sirve para enviar la imagen legible de tus incapacidades médicas, solicitar paz y salvos o reportar ajustes de datos bancarios.'},
+                        {title: '💻 Portal Autoservicio (Plataforma Web)', desc: 'Sirve para descargar directamente tus comprobantes de pago de nómina y certificados de ingresos sin necesidad de hacer filas.'}
+                    ])">
+                        <span>Interactuar con el Proceso</span> →
+                    </button>
+                </article>
+
+                <!-- Proceso 3 -->
+                <article class="card" data-title="capacitacion formacion desempeño aprendizaje cursos">
+                    <div>
+                        <div class="card-top">
+                            <span class="process-badge">Desarrollo</span>
+                            <small style="color:var(--text-muted);">Proceso 03</small>
+                        </div>
+                        <h4 class="card-title">Formación y Capacitación Abundancia</h4>
+                        <p class="card-desc">Fortalecemos las competencias técnicas en manipulación de alimentos, atención al cliente y liderazgo.</p>
+                        
+                        <ul class="activity-list">
+                            <li>Cursos en Manejo Higiénico de Alimentos y Cajas.</li>
+                            <li>Evaluaciones del desempeño laboral.</li>
+                            <li>Plan de carrera y promociones internas.</li>
+                            <li>Talleres de Servicio al Cliente "Experiencia Abundancia".</li>
+                        </ul>
+                    </div>
+                    <button class="btn-action" onclick="openInteractiveModal('Formación y Capacitación Abundancia', [
+                        {title: '📞 Teléfono Fijo: (604) 604-1210 - Ext. 108', desc: 'Sirve para consultar la programación mensual de talleres, cupos para el curso de manipulación de alimentos o reprogramar asistencias.'},
+                        {title: '📧 Correo de Capacitaciones: capacitaciones@laabundancia.com', desc: 'Sirve para radicar diplomas externos, solicitar certificados de asistencia a capacitaciones del supermercado o enviar propuestas de cursos.'},
+                        {title: '🏬 Atención Presencial: Oficina de Gestión Humana (Piso 2)', desc: 'Sirve para solicitar retroalimentación sobre tus evaluaciones de desempeño o inscribirte directamente a los planes de carrera.'}
+                    ])">
+                        <span>Interactuar con el Proceso</span> →
+                    </button>
+                </article>
+
+                <!-- Proceso 4 -->
+                <article class="card" data-title="bienestar clima beneficios incentivos reconocimientos">
+                    <div>
+                        <div class="card-top">
+                            <span class="process-badge">Cultura & Bienestar</span>
+                            <small style="color:var(--text-muted);">Proceso 04</small>
+                        </div>
+                        <h4 class="card-title">Bienestar y Clima Organizacional</h4>
+                        <p class="card-desc">Programas diseñados para mejorar la calidad de vida y celebrar el compromiso de nuestros colaboradores.</p>
+                        
+                        <ul class="activity-list">
+                            <li>Plan de beneficios (descuentos en supermercado).</li>
+                            <li>Celebraciones corporativas y día del empleado.</li>
+                            <li>Programa de reconocimiento "Empleado del Mes".</li>
+                            <li>Medición anual del Clima Organizacional.</li>
+                        </ul>
+                    </div>
+                    <button class="btn-action" onclick="openInteractiveModal('Bienestar y Clima Organizacional', [
+                        {title: '📞 Teléfono Fijo: (604) 604-1210 - Ext. 106', desc: 'Sirve para preguntar por los convenios comerciales vigentes, auxilios corporativos o inscripciones a eventos y fechas especiales.'},
+                        {title: '📧 Correo de Bienestar: bienestar@laabundancia.com', desc: 'Sirve para enviar propuestas de actividades, solicitar la activación del descuento de empleado o enviar solicitudes de ayuda social.'},
+                        {title: '📱 WhatsApp Corporativo: (+57) 314 604 8899', desc: 'Sirve para recibir notificaciones rápidas, circulares de bienestar, horarios de celebraciones y confirmaciones de eventos.'}
+                    ])">
+                        <span>Interactuar con el Proceso</span> →
+                    </button>
+                </article>
+
+                <!-- Proceso 5 -->
+                <article class="card" data-title="sst seguridad salud salud ocupacional riesgo ergonomia epp">
+                    <div>
+                        <div class="card-top">
+                            <span class="process-badge">Prevención</span>
+                            <small style="color:var(--text-muted);">Proceso 05</small>
+                        </div>
+                        <h4 class="card-title">Seguridad y Salud en el Trabajo (SST)</h4>
+                        <p class="card-desc">Promovemos un ambiente de trabajo seguro en góndolas, cavas, bodegas y cajas registradoras.</p>
+                        
+                        <ul class="activity-list">
+                            <li>Capacitación en ergonomía y pausas activas.</li>
+                            <li>Exámenes médicos ocupacionales periódicos.</li>
+                            <li>Entrega y control de Elementos de Protección Personal.</li>
+                            <li>Comité Paritario de Seguridad y Salud (COPASST).</li>
+                        </ul>
+                    </div>
+                    <button class="btn-action" onclick="openInteractiveModal('Seguridad y Salud en el Trabajo (SST)', [
+                        {title: '📞 Teléfono Fijo: (604) 604-1210 - Ext. 105', desc: 'Sirve para el reporte inmediato de accidentes laborales, alertas por derrames o fallas de seguridad en el cuarto frío y bodegas.'},
+                        {title: '📧 Correo de SST: sst@laabundancia.com', desc: 'Sirve para reportar condiciones peligrosas en infraestructura, adjuntar exámenes periódicos o solicitar el cambio de elementos ergonómicos.'},
+                        {title: '🏬 Entrega Física: Oficina GH / Almacén Central', desc: 'Sirve para reclamar tu dotación de calzado antideslizante, fajas de fuerza, delantales y guantes de protección.'}
+                    ])">
+                        <span>Interactuar con el Proceso</span> →
+                    </button>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- Canales de Atención Interactivos -->
+        <section>
+            <div class="section-header">
+                <h3>Canales Disponibles para Acceder a Servicios</h3>
+            </div>
+
+            <div class="channels-grid">
+                
+                <!-- Botón de PQRS Destacado -->
+                <div class="channel-card highlight" onclick="openPQRSModal()">
+                    <div class="channel-icon">📋</div>
+                    <h4>Formulario PQRS</h4>
+                    <p>Radica oficialmente peticiones, quejas, reclamos o sugerencias con número de seguimiento.</p>
+                    <button class="btn-outline">Diligenciar Formato PQRS</button>
+                </div>
+
+                <div class="channel-card" onclick="openGeneralForm('Portal Autoservicio (24/7)', 'Generación de Certificados y Desprendibles')">
+                    <div class="channel-icon">💻</div>
+                    <h4>Portal Autoservicio</h4>
+                    <p>Descarga inmediata de certificados de trabajo, desprendibles y días de vacaciones.</p>
+                    <button class="btn-outline">Ingresar al Portal</button>
+                </div>
+
+                <div class="channel-card" onclick="openGeneralForm('Mesa de Ayuda (Ticketing)', 'Radicación de Novedades e Incapacidades')">
+                    <div class="channel-icon">🎫</div>
+                    <h4>Mesa de Ayuda</h4>
+                    <p>Registra tickets para revisión de pagos, liquidaciones e incapacidades médicas.</p>
+                    <button class="btn-outline">Crear Ticket</button>
+                </div>
+
+                <div class="channel-card" onclick="openGeneralForm('Oficina de Gestión Humana', 'Atención Presencial en Sede')">
+                    <div class="channel-icon">🏬</div>
+                    <h4>Atención Presencial</h4>
+                    <p>Ubicada en el Piso 2 de la Sede Principal. Horario: Lunes a Viernes de 8:00 a.m. a 5:00 p.m.</p>
+                    <button class="btn-outline">Agendar Cita</button>
+                </div>
+
+                <div class="channel-card" onclick="openGeneralForm('Conmutador General TH', 'Atención Telefónica Fija')">
+                    <div class="channel-icon">📞</div>
+                    <h4>Línea Telefónica Fija</h4>
+                    <p>Llama al (604) 604-1210 para comunicarte con las extensiones de cada proceso.</p>
+                    <button class="btn-outline">Llamar a Central</button>
+                </div>
+
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2026 Supermercado La Abundancia - Dirección de Gestión del Talento Humano</p>
+            <p>Comprometidos con el desarrollo y bienestar de nuestra gente en nuestra sede única.</p>
+        </footer>
+
+    </div>
+
+    <!-- Modal Dinámico Interactivo -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            
+            <div id="modalBodyContent">
+                <!-- El contenido se inyecta dinámicamente desde JS -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Búsqueda en vivo
+        document.getElementById('searchInput').addEventListener('keyup', function(e) {
+            const term = e.target.value.toLowerCase();
+            const cards = document.querySelectorAll('.card');
+
+            cards.forEach(card => {
+                const searchData = card.getAttribute('data-title') + " " + card.textContent.toLowerCase();
+                card.style.display = searchData.includes(term) ? 'flex' : 'none';
+            });
+        });
+
+        // Formulario PQRS estricto al formato suministrado
+        function openPQRSModal() {
+            const today = new Date().toISOString().split('T')[0];
+            const now = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+            const content = `
+                <div class="modal-header">
+                    <h3>Formato de Peticiones, Quejas, Reclamos y Sugerencias (PQRS)</h3>
+                    <small style="color:var(--brand-red); font-weight:600;">Supermercado La Abundancia</small>
+                </div>
+
+                <form id="pqrsForm" onsubmit="submitPQRSForm(event)">
+                    
+                    <div style="background:#f9fafb; padding:1rem; border-radius:8px; border:1px solid var(--border-color); margin-bottom:1rem;">
+                        <h4 style="color:var(--brand-green); font-size:0.9rem; margin-bottom:0.75rem;">INFORMACIÓN DEL SOLICITANTE</h4>
+                        
+                        <div class="form-group">
+                            <label for="pqrsNombre">Nombre completo *</label>
+                            <input type="text" id="pqrsNombre" class="form-control" required placeholder="Ej. Juan Pérez">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pqrsDoc">Tipo y número de documento *</label>
+                            <input type="text" id="pqrsDoc" class="form-control" required placeholder="Ej. C.C. 1017000000">
+                        </div>
+
+                        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:0.75rem;">
+                            <div class="form-group">
+                                <label for="pqrsEmpresa">Empresa (si aplica)</label>
+                                <input type="text" id="pqrsEmpresa" class="form-control" placeholder="Opcional">
+                            </div>
+                            <div class="form-group">
+                                <label for="pqrsCargo">Cargo (si aplica)</label>
+                                <input type="text" id="pqrsCargo" class="form-control" placeholder="Opcional">
+                            </div>
+                        </div>
+
+                        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:0.75rem;">
+                            <div class="form-group">
+                                <label for="pqrsEmail">Correo electrónico *</label>
+                                <input type="email" id="pqrsEmail" class="form-control" required placeholder="correo@ejemplo.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="pqrsTel">Teléfono de contacto *</label>
+                                <input type="tel" id="pqrsTel" class="form-control" required placeholder="Ej. 3000000000">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="background:#f9fafb; padding:1rem; border-radius:8px; border:1px solid var(--border-color); margin-bottom:1rem;">
+                        <h4 style="color:var(--brand-green); font-size:0.9rem; margin-bottom:0.75rem;">INFORMACIÓN DE LA SOLICITUD</h4>
+                        
+                        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:0.75rem;">
+                            <div class="form-group">
+                                <label>Fecha de radicación</label>
+                                <input type="date" class="form-control" value="${today}" readonly style="background:#e5e7eb;">
+                            </div>
+                            <div class="form-group">
+                                <label>Hora</label>
+                                <input type="text" class="form-control" value="${now}" readonly style="background:#e5e7eb;">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pqrsCanal">Canal de recepción *</label>
+                            <select id="pqrsCanal" class="form-control" required>
+                                <option value="Página web" selected>Página web</option>
+                                <option value="Presencial">Presencial</option>
+                                <option value="Telefónico">Telefónico</option>
+                                <option value="Correo electrónico">Correo electrónico</option>
+                                <option value="Buzón de sugerencias">Buzón de sugerencias</option>
+                                <option value="Otro">Otro</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pqrsTipo">Tipo de solicitud *</label>
+                            <select id="pqrsTipo" class="form-control" required>
+                                <option value="">Seleccione una opción...</option>
+                                <option value="Petición">Petición</option>
+                                <option value="Queja">Queja</option>
+                                <option value="Reclamo">Reclamo</option>
+                                <option value="Sugerencia">Sugerencia</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pqrsDesc">DESCRIPCIÓN DE LA SOLICITUD *</label>
+                        <textarea id="pqrsDesc" class="form-control" rows="4" required placeholder="Describa ampliamente los hechos o motivos de su solicitud..."></textarea>
+                    </div>
+
+                    <div style="background:#f9fafb; padding:1rem; border-radius:8px; border:1px solid var(--border-color); margin-bottom:1rem;">
+                        <h4 style="color:var(--brand-green); font-size:0.9rem; margin-bottom:0.5rem;">ANEXOS (SI APLICA)</h4>
+                        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap:0.5rem; margin-bottom:0.5rem; font-size:0.85rem;">
+                            <label><input type="checkbox" value="Fotografías"> Fotografías</label>
+                            <label><input type="checkbox" value="Documentos"> Documentos</label>
+                            <label><input type="checkbox" value="Facturas"> Facturas</label>
+                            <label><input type="checkbox" value="Correos electrónicos"> Correos electr.</label>
+                            <label><input type="checkbox" value="Otros"> Otros</label>
+                        </div>
+                        <div class="form-group" style="margin-bottom:0;">
+                            <input type="text" id="pqrsEspecifique" class="form-control" placeholder="Especifique detalles de los anexos si aplica...">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-submit">Radicar Formulario PQRS</button>
+                </form>
+            `;
+
+            document.getElementById('modalBodyContent').innerHTML = content;
+            document.getElementById('modalOverlay').classList.add('active');
+        }
+
+        function submitPQRSForm(e) {
+            e.preventDefault();
+            const nombre = document.getElementById('pqrsNombre').value;
+            const tipo = document.getElementById('pqrsTipo').value;
+            const radicado = Math.floor(100000 + Math.random() * 900000);
+
+            const successContent = `
+                <div style="text-align: center; padding: 1.5rem 0;">
+                    <div style="font-size: 3rem; color: var(--brand-green); margin-bottom: 0.5rem;">✓</div>
+                    <h4 style="color: var(--brand-green); font-size: 1.25rem; margin-bottom: 0.5rem;">¡PQRS Radicada Exitosamente!</h4>
+                    <p style="font-size: 0.88rem; color: var(--text-main); margin-bottom: 0.5rem;">
+                        Estimado(a) <strong>${nombre}</strong>, se ha registrado su <strong>${tipo}</strong> correctamente.
+                    </p>
+                    <div style="background:#edf7ed; border:1px solid var(--brand-green); padding:0.75rem; border-radius:8px; margin: 1rem 0;">
+                        <small style="color:var(--text-muted); display:block;">Número de Radicado asignado:</small>
+                        <strong style="font-size:1.2rem; color:var(--brand-green);">#PQRS-${radicado}</strong>
+                    </div>
+                    <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+                        Su solicitud ingresó en estado <strong>Recibida</strong> y fue remitida al área encargada para su posterior trámite y respuesta.
+                    </p>
+                    <button class="btn-submit" style="background:var(--brand-green);" onclick="closeModal()">Entendido</button>
+                </div>
+            `;
+            document.getElementById('modalBodyContent').innerHTML = successContent;
+        }
+
+        // Modal que muestra las opciones de contacto específicas
+        function openInteractiveModal(processName, contactOptions) {
+            let optionsHtml = '';
+            contactOptions.forEach(opt => {
+                optionsHtml += `
+                    <li>
+                        <strong>${opt.title}</strong>
+                        <span>${opt.desc}</span>
+                    </li>
+                `;
+            });
+
+            const content = `
+                <div class="modal-header">
+                    <h3>${processName}</h3>
+                    <small style="color:var(--brand-red); font-weight:600;">Supermercado La Abundancia | Guía de Atención</small>
+                </div>
+
+                <div class="interactive-info-box">
+                    <h4>ℹ️ Opciones de Contacto Directo y su Función</h4>
+                    <p style="font-size: 0.83rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+                        A continuación te explicamos exactamente a través de qué medio contactarnos y para qué sirve cada opción:
+                    </p>
+                    <ul class="contact-options-list">
+                        ${optionsHtml}
+                    </ul>
+                </div>
+
+                <div style="text-align: center; margin-top: 1.25rem;">
+                    <p style="font-size: 0.83rem; color: var(--text-main); margin-bottom: 0.75rem;">¿Deseas dejar registrada una solicitud digital sobre este proceso?</p>
+                    <button class="btn-submit" style="background:var(--brand-green);" onclick="openRequestForm('${processName}')">Registrar Solicitud Digital</button>
+                </div>
+            `;
+
+            document.getElementById('modalBodyContent').innerHTML = content;
+            document.getElementById('modalOverlay').classList.add('active');
+        }
+
+        // Formulario de radicación de solicitud al hacer clic en el botón interno
+        function openRequestForm(processName) {
+            const content = `
+                <div class="modal-header">
+                    <h3>Radicar Solicitud: ${processName}</h3>
+                    <small style="color:var(--brand-red); font-weight:600;">Supermercado La Abundancia</small>
+                </div>
+
+                <form id="interactionForm" onsubmit="submitForm(event, '${processName}')">
+                    <div class="form-group">
+                        <label for="empName">Nombre del Colaborador</label>
+                        <input type="text" id="empName" class="form-control" placeholder="Ej. Carlos Mendoza" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="empDoc">Número de Cédula</label>
+                        <input type="text" id="empDoc" class="form-control" placeholder="Número de identificación" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="processAction">Tipo de Requerimiento</label>
+                        <select id="processAction" class="form-control" required>
+                            <option value="">Selecciona la opción...</option>
+                            <option value="Consulta sobre el proceso">Consulta de información general</option>
+                            <option value="Radicación de documentos">Radicación de documentación</option>
+                            <option value="Solicitud de acompañamiento">Solicitud de apoyo / asesoría</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="detailText">Observaciones / Detalle</label>
+                        <textarea id="detailText" class="form-control" rows="3" placeholder="Escribe aquí los detalles de tu solicitud..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit">Enviar Solicitud a Talento Humano</button>
+                </form>
+            `;
+            document.getElementById('modalBodyContent').innerHTML = content;
+        }
+
+        // Modal para los canales generales
+        function openGeneralForm(channelName, detail) {
+            const content = `
+                <div class="modal-header">
+                    <h3>Canal: ${channelName}</h3>
+                    <small style="color:var(--brand-red); font-weight:600;">Supermercado La Abundancia</small>
+                </div>
+
+                <form id="interactionForm" onsubmit="submitForm(event, '${channelName}')">
+                    <div class="form-group">
+                        <label for="empName">Nombre del Colaborador</label>
+                        <input type="text" id="empName" class="form-control" placeholder="Ej. Carlos Mendoza" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="empDoc">Número de Cédula</label>
+                        <input type="text" id="empDoc" class="form-control" placeholder="Número de identificación" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Trámite Asociado</label>
+                        <input type="text" class="form-control" value="${detail}" readonly style="background:#f3f4f6;">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="detailText">Descripción detallada</label>
+                        <textarea id="detailText" class="form-control" rows="3" placeholder="Indica fechas, asunto o requerimiento..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit">Enviar a través de este Canal</button>
+                </form>
+            `;
+            document.getElementById('modalBodyContent').innerHTML = content;
+            document.getElementById('modalOverlay').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.remove('active');
+        }
+
+        function submitForm(e, origin) {
+            e.preventDefault();
+            const nombre = document.getElementById('empName').value;
+            
+            const successContent = `
+                <div style="text-align: center; padding: 1.5rem 0;">
+                    <div style="font-size: 3rem; color: var(--brand-green); margin-bottom: 0.5rem;">✓</div>
+                    <h4 style="color: var(--brand-green); font-size: 1.25rem; margin-bottom: 0.5rem;">¡Solicitud Registrada con Éxito!</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+                        Gracias <strong>${nombre}</strong>. Tu trámite vinculado a <strong>${origin}</strong> ha ingresado al sistema de Gestión Humana del Supermercado La Abundancia.
+                    </p>
+                    <button class="btn-submit" style="background:var(--brand-green);" onclick="closeModal()">Entendido</button>
+                </div>
+            `;
+            document.getElementById('modalBodyContent').innerHTML = successContent;
+        }
+    </script>
+
+</body>
+</html>
